@@ -1,12 +1,26 @@
-import React from "react"
+import React, {useState} from "react"
 import StartGame from "./components/StartGame"
+import Quiz from "./components/Quiz"
 
 const App = () => {
+
+  const [play, setPlay] = useState(false)
+
+  const handleStartQuiz = () => {
+    setPlay(true)
+  }
+
   return (
     <div className="App--container">
       <div id="App--yellow-circle" className="App--circle-design"></div>
       <div id="App--blue-circle" className="App--circle-design"></div>
-      <StartGame />
+
+      {play ? <Quiz /> : 
+      <StartGame 
+        handleStartQuiz={handleStartQuiz}
+      />
+      }
+
     </div>
   )
 }
