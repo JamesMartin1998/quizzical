@@ -10,6 +10,8 @@ const App = () => {
     setPlay(true)
   }
 
+  console.log("App component loaded")
+
   return (
     <div className="App--container">
       <div id="App--yellow-circle" className="App--circle-design"></div>

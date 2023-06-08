@@ -2,6 +2,10 @@ import React from "react"
 
 const StartGame = (props) => {
     const {handleStartQuiz} = props
+
+    console.log("StartGame component loaded")
+
+
     return (
         <div className="StartGame--container">
             <h1>Quizzical</h1>

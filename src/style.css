@@ -93,3 +93,13 @@ body {
     font-size: 24px;
   }
 }
+
+/* Question */
+
+.selected {
+  background-color: red;
+}
+
+.not-selected {
+  background-color: blue;
+}
