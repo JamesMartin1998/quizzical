@@ -1,38 +1,17 @@
 import React, {useState, useEffect} from "react"
 
 const Question = (props) => {
-    const {questionData} = props
+    const {id, questionData, selectAnswer, selectedAnswers} = props
 
-    const [allAnswers, setAllAnswers] = useState(questionData.incorrect_answers)
+    // console.log(questionData)
 
-    const [selectedAnswer, setSelectedAnswer] = useState("")
-
-    console.log(questionData.correct_answer)
-    console.log(selectedAnswer)
-    
-    useEffect(() => {
-        // storing an array of all answers and the correct is at random index
-        setAllAnswers(prevAnswers => {
-            const randomIndex = Math.floor(Math.random() * 4)
-            const randomisedAnswers = [...prevAnswers]
-            randomisedAnswers.splice(randomIndex, 0, questionData.correct_answer)
-            return randomisedAnswers
-        })
-    }, [])
-
-    const selectAnswer = (event) => {
-        const {id} = event.target
-        // set as index
-        setSelectedAnswer(id-1)
-        
-    }
-
-    const answerButtons = allAnswers.map(answer => (
+    const answerButtons = questionData.answers.map(answer => (
         <button 
-            key={allAnswers.indexOf(answer)+1}
-            id={allAnswers.indexOf(answer)+1}
-            onClick={selectAnswer}
-            className={selectedAnswer===allAnswers.indexOf(answer) ? "selected" : "not-selected"}
+            key={questionData.answers.indexOf(answer)+1}
+            id={questionData.answers.indexOf(answer)+1}
+            onClick={(event) => selectAnswer(event, id)}
+            // className={selectedAnswers[id]===allAnswers.indexOf(answer) ? "selected" : "not-selected"}
+            className={selectedAnswers[id].selectedAnswer === questionData.answers.indexOf(answer) ? "selected" : "not-selected"}
         >
             {answer}
         </button>
