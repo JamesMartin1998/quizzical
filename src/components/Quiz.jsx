@@ -68,7 +68,7 @@ const Quiz = () => {
     }, [questionsData])
 
     const questions = allAnswers.map(questionData => {
-        return <Question key={questionData.id} id={questionData.id} questionData={questionData} selectAnswer={selectAnswer} selectedAnswers={selectedAnswers} />
+        return <Question key={questionData.id} id={questionData.id} questionData={questionData} selectAnswer={selectAnswer} selectedAnswers={selectedAnswers} finished={finished} />
     })
 
     const checkAnswers = () => {
@@ -79,7 +79,6 @@ const Quiz = () => {
             }
         }
         setFinished(true)
-        console.log(`Your score was ${score}`)
     }
 
     const resetGame = () => {
@@ -91,10 +90,13 @@ const Quiz = () => {
     return (
         <div className="Quiz--container">
             {questions}
-            {finished ? <button onClick={resetGame}>Play Again</button> : <button onClick={checkAnswers}>
+            <div className="Quiz--controls-container">
+                {finished ? <button className="play-again" onClick={resetGame}>Play Again</button> : <button className="check-answers" onClick={checkAnswers}>
                 Check Answers
-            </button>}
-            {finished && <p>You scored {score} out of {allAnswers.length}</p>}
+                </button>}
+            </div>
+            
+            {finished && <p className="score-alert">You scored {score} out of {allAnswers.length}</p>}
         </div>
     )
 }

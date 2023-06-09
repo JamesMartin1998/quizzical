@@ -10,10 +10,10 @@ body {
 .App--container {
   background-color: #f5f7fb;
   width: 100%;
-  height: 100vh;
+  min-height: 100vh;
   position: relative;
   overflow-x: hidden;
-  overflow-y: hidden;
+  /* overflow-y: hidden; */
   display: flex;
   justify-content: center;
   align-items: center;
@@ -21,7 +21,6 @@ body {
 
 .App--circle-design {
   position: absolute;
-  border-radius: 50%;
   width: 500px;
   height: 500px;
 }
@@ -30,18 +29,23 @@ body {
   background-color: #fffad1;
   top: -250px;
   right: -250px;
+  border-radius: 50%;
 }
 
 #App--blue-circle {
   background-color: #deebf8;
-  bottom: -250px;
+  top: calc(100% - 250px);
   left: -250px;
+  height: 250px;
+  width: 500px;
+  border-bottom-left-radius: 500px;
+  border-top-right-radius: 500px;
 }
 
 @media (max-width: 900px) {
   .App--circle-design {
     width: 300px;
-    height: 300px;
+    height: 300px !important;
   }
 
   #App--yellow-circle {
@@ -50,8 +54,12 @@ body {
   }
 
   #App--blue-circle {
-    bottom: -150px;
+    top: calc(100% - 150px);
     left: -150px;
+    width: 300px !important;
+    height: 150px !important;
+    border-bottom-left-radius: 300px;
+    border-top-right-radius: 300px;
   }
 }
 
@@ -66,7 +74,9 @@ body {
   font-weight: 700;
 }
 
-.StartGame--container button {
+.StartGame--container button,
+.play-again,
+.check-answers {
   background-color: #4d5b9e;
   color: #f5f7fb;
   border-radius: 15px;
@@ -76,7 +86,15 @@ body {
   transition: all 0.2s ease-in-out;
 }
 
-.StartGame--container button:hover {
+.play-again,
+.check-answers {
+  font-size: 20px;
+  font-weight: 700;
+}
+
+.StartGame--container button:hover,
+.play-again:hover,
+.check-answers:hover {
   transform: scale(1.1);
 }
 
@@ -94,12 +112,81 @@ body {
   }
 }
 
+/* Quiz Component */
+
+.Quiz--container {
+  /* background-color: orange; */
+  /* set background color to transparent later */
+  z-index: 2;
+  padding: 15px;
+}
+
+@media (min-width: 600px) {
+  .Quiz--container {
+    width: 80%;
+  }
+}
+
+@media (min-width: 800px) {
+  .Quiz--container {
+    width: 70%;
+  }
+}
+
+@media (min-width: 1000px) {
+  .Quiz--container {
+    width: 60%;
+  }
+}
+
+.Quiz--controls-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.score-alert {
+  color: #293264;
+  font-size: 20px;
+  font-weight: 700;
+}
+
 /* Question */
 
+.Question--container {
+  color: #293264;
+  font-weight: 700;
+  margin-bottom: 1rem;
+}
+
+.Question--container p {
+  font-size: 20px;
+}
+
+.Question--container button {
+  font-size: 14px;
+}
+
+.Question--container button {
+  color: #293264;
+  border-radius: 15px;
+  border: #4d5b9e solid 2px;
+  padding: 0.75rem 1.5rem;
+  margin-right: 17px;
+  margin-bottom: 10px;
+}
+
+.Question--container button:hover {
+  background-color: #4d5b9e;
+  color: #f5f7fb;
+  cursor: pointer;
+}
+
 .selected {
-  background-color: red;
+  background-color: #4d5b9e;
+  color: #f5f7fb !important;
 }
 
 .not-selected {
-  background-color: blue;
+  background-color: transparent;
 }
