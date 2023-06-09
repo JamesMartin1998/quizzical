@@ -6,9 +6,9 @@ const Quiz = () => {
 
     const [questionsData, setQuestionsData] = useState([])
     const [allAnswers, setAllAnswers] = useState([])
-    const [selectedAnswers, setSelectedAnswers] = useState([
-        
-    ])
+    const [selectedAnswers, setSelectedAnswers] = useState([])
+    const [score, setScore] = useState(0)
+    const [finished, setFinished] = useState(false)
 
     console.log("Quiz component loaded")
     // console.log(questionsData)
@@ -46,16 +46,18 @@ const Quiz = () => {
             return startingArray
         })
         // console.log(`Question id = ${questionId} , Button id = ${id}`)
-        console.log(selectedAnswers)
+        // console.log(selectedAnswers)
+    }
+
+    const getQuestions = async () => {
+        const res = await fetch("https://opentdb.com/api.php?amount=5&type=multiple")
+        const data = await res.json() 
+        const results = data.results
+        setQuestionsData(results)
     }
 
     useEffect(() => {
-        const getQuestions = async () => {
-            const res = await fetch("https://opentdb.com/api.php?amount=5&type=multiple")
-            const data = await res.json() 
-            const results = data.results
-            setQuestionsData(results)
-        }
+        
         getQuestions()
         
     }, [])
@@ -70,15 +72,29 @@ const Quiz = () => {
     })
 
     const checkAnswers = () => {
-        console.log("check")
+        // console.log("check")
+        for (let i=0; i<selectedAnswers.length; i++) {
+            if (allAnswers[i].answers[selectedAnswers[i].selectedAnswer] === allAnswers[i].correct_answer){
+                setScore(prevScore => prevScore+1)
+            }
+        }
+        setFinished(true)
+        console.log(`Your score was ${score}`)
+    }
+
+    const resetGame = () => {
+        getQuestions()
+        setScore(0)
+        setFinished(false)
     }
 
     return (
         <div className="Quiz--container">
             {questions}
-            <button onClick={checkAnswers}>
+            {finished ? <button onClick={resetGame}>Play Again</button> : <button onClick={checkAnswers}>
                 Check Answers
-            </button>
+            </button>}
+            {finished && <p>You scored {score} out of {allAnswers.length}</p>}
         </div>
     )
 }
