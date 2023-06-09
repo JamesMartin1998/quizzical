@@ -1,6 +1,5 @@
 import React, {useState, useEffect} from "react"
 import Question from "./Question"
-import { nanoid } from 'https://cdn.jsdelivr.net/npm/nanoid/nanoid.js'
 
 const Quiz = () => {
 
@@ -37,7 +36,6 @@ const Quiz = () => {
     }
 
     const selectAnswer = (event, questionId) => {
-        // id is the button id
         const {id} = event.target
         setSelectedAnswers(prevData => {
             const startingArray = [...prevData]
@@ -45,14 +43,13 @@ const Quiz = () => {
             questionObj.selectedAnswer = id-1
             return startingArray
         })
-        // console.log(`Question id = ${questionId} , Button id = ${id}`)
-        // console.log(selectedAnswers)
     }
 
     const getQuestions = async () => {
         const res = await fetch("https://opentdb.com/api.php?amount=5&type=multiple")
         const data = await res.json() 
         const results = data.results
+
         setQuestionsData(results)
     }
 
@@ -72,7 +69,6 @@ const Quiz = () => {
     })
 
     const checkAnswers = () => {
-        // console.log("check")
         for (let i=0; i<selectedAnswers.length; i++) {
             if (allAnswers[i].answers[selectedAnswers[i].selectedAnswer] === allAnswers[i].correct_answer){
                 setScore(prevScore => prevScore+1)

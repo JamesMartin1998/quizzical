@@ -13,7 +13,6 @@ body {
   min-height: 100vh;
   position: relative;
   overflow-x: hidden;
-  /* overflow-y: hidden; */
   display: flex;
   justify-content: center;
   align-items: center;
@@ -115,8 +114,6 @@ body {
 /* Quiz Component */
 
 .Quiz--container {
-  /* background-color: orange; */
-  /* set background color to transparent later */
   z-index: 2;
   padding: 15px;
 }
