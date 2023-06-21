@@ -1,8 +1,4 @@
-# Quizzical
-
-## Quiz app utilising OTDB API
-
-### Built Using ReactJS
+# Quizzical - Quiz app utilising OTDB API - Built Using ReactJS
 
 ![Responsive App Image](./src/assets/responsive.png)
 
